@@ -58,7 +58,13 @@
 
 ### 1. 安装 skill
 
-将仓库克隆到你使用的工具的 skills 目录，选择对应的一条命令：
+本项目是一个包含 `SKILL.md`、参考资料和模板的 skill 目录。选择你使用的工具，把**整个仓库**克隆到它会搜索的 skills 目录。
+
+**通用目录：Codex、OpenCode，以及使用默认状态目录的 OpenClaw**
+
+```bash
+git clone https://github.com/dashenbibi/novel-master.git ~/.agents/skills/novel-master
+```
 
 **Claude Code**
 
@@ -66,13 +72,27 @@
 git clone https://github.com/dashenbibi/novel-master.git ~/.claude/skills/novel-master
 ```
 
-**Codex**
+其他支持 skill 目录的工具，可将仓库克隆到该工具文档指定的目录：
 
 ```bash
-git clone https://github.com/dashenbibi/novel-master.git ~/.codex/skills/novel-master
+git clone https://github.com/dashenbibi/novel-master.git <你的 skills 目录>/novel-master
 ```
 
-如果对应目录已经存在，请在该目录中更新已有仓库，避免覆盖本地修改。其他支持 skills 的工具，请按其说明将本仓库放入 skill 搜索目录。安装后，在需要时重启工具或开启新会话以加载 skill。
+将 `<你的 skills 目录>` 替换为实际路径；无需输入尖括号。如果通过下载 ZIP 安装，解压后也要保留整个目录，确保 `novel-master/SKILL.md` 和 `references/`、`assets/` 在同一目录下。
+
+**安装后**：开启新会话并在对话中输入“使用 novel-master”。Claude Code 可输入 `/novel-master`；Codex CLI 或 IDE 可通过 `/skills` 或 `$novel-master` 选择；OpenCode 可在提示中提及 `@novel-master`。如果没有显示，检查路径和工具的 skill 设置，必要时重启工具。
+
+**更新已有 Git 安装**：先进入安装目录并检查是否有本地修改，再拉取更新。例如通用目录：
+
+```bash
+cd ~/.agents/skills/novel-master
+git status
+git pull --ff-only
+```
+
+如果安装在其他目录，请将 `cd` 路径替换为实际位置；有本地修改时先处理修改，避免覆盖。不要在同一个工具的多个搜索目录中重复安装，以免加载到旧副本。
+
+> 上述目录是常见默认路径。不同版本、平台或自定义配置可能有所不同；以工具的 skill 设置为准。当前已按 [Codex](https://developers.openai.com/codex/skills/)、[Claude Code](https://code.claude.com/docs/en/skills)、[OpenCode](https://opencode.ai/docs/skills/) 和 [OpenClaw](https://docs.openclaw.ai/tools/skills) 的文档列出路径，其他工具请查阅其文档。
 
 ### 2. 开始一个项目
 

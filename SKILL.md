@@ -1,13 +1,6 @@
 ---
 name: novel-master
 description: 长篇小说创作大师技能。支持数百万字小说的整体规划、分卷设计、角色管理、世界观构建、章节写作、一致性检查和伏笔追踪。使用场景：(1) 创作长篇网络小说 (2) 规划多卷系列作品 (3) 管理复杂人物关系和剧情线索 (4) 保持长篇小说的一致性 (5) 生成章节内容 (6) 伏笔回收检查
-argument-hint: 说明你的题材、主线目标、当前章节或需要处理的文件范围
-compatibility:
-  os:
-    - darwin
-    - linux
-    - win32
-user-invocable: true
 license: MIT
 metadata:
   version: 1.3.0
