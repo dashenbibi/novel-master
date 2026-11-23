@@ -22,8 +22,8 @@ function printHelp() {
 用法:
   novel create <书名> <类型> <核心创意>   创建新项目
   novel chapter <项目> <章号> <标题>      生成章节
-  novel polish <项目> <章号>              润色章节
-  novel check <项目> <起始章>-<结束章>    一致性检查
+  novel polish <项目> <章号>              输出润色报告框架（不改正文）
+  novel check <项目> <起始章>-<结束章>    检查章节文件是否存在
   novel outline <项目> <卷号>             生成卷大纲
   novel status                            显示帮助
 `);
@@ -56,7 +56,7 @@ function ensureWrite(filePath, content) {
     console.error(`❌ 文件已存在：${filePath}`);
     process.exit(1);
   }
-  fs.writeFileSync(filePath, content);
+  fs.writeFileSync(filePath, content, { flag: 'wx' });
 }
 
 function writeTemplate(filePath, relativePath, replacements = []) {
@@ -64,14 +64,25 @@ function writeTemplate(filePath, relativePath, replacements = []) {
   replacements.forEach(([pattern, value]) => {
     content = content.replace(pattern, value);
   });
-  fs.writeFileSync(filePath, content);
+  fs.writeFileSync(filePath, content, { flag: 'wx' });
 }
 
 function createProject(name, type, concept) {
   const projectDir = path.join(WORKSPACE, `novel-${name}`);
 
-  // 创建目录结构
-  const dirs = ['', '01-characters', '02-world', '03-volumes', '04-chapters', '05-tracker'];
+  // 原子创建项目目录，拒绝复用已有项目，避免覆盖用户文件。
+  fs.mkdirSync(WORKSPACE, { recursive: true });
+  try {
+    fs.mkdirSync(projectDir);
+  } catch (error) {
+    if (error.code === 'EEXIST') {
+      console.error(`❌ 项目路径已存在，未修改任何文件：${projectDir}`);
+      process.exit(1);
+    }
+    throw error;
+  }
+
+  const dirs = ['01-characters', '02-world', '03-volumes', '04-chapters', '05-tracker'];
 
   dirs.forEach((dir) => {
     const fullPath = path.join(projectDir, dir);
@@ -123,7 +134,7 @@ function polishChapter(projectName, chapterNo) {
     console.error(`❌ 章节不存在：${chapterPath}`);
     process.exit(1);
   }
-  const output = [`润色目标：${fileName}`, '', '问题点：', '- ', '', '证据段落：', '- ', '', '修改建议：', '- '].join('\n');
+  const output = ['说明：这里只输出空白报告框架，不会检查或修改正文。请在 AI 会话中使用 novel-master 完成润色。', `润色目标：${fileName}`, '', '问题点：', '- ', '', '证据段落：', '- ', '', '修改建议：', '- '].join('\n');
   console.log(output);
 }
 
@@ -154,7 +165,7 @@ function checkChapters(projectName, range) {
   } else {
     console.log('✅ 章节文件齐全');
   }
-  console.log('输出格式：问题点 / 证据段落 / 修正建议');
+  console.log('说明：只检查文件是否存在，未检查内容或一致性。请在 AI 会话中使用 novel-master 进行审查。');
 }
 
 function showStatus() {
