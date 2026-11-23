@@ -11,16 +11,20 @@
 
 ```
 your-novel/
-├── 00-overview.md          # 从 templates/00-overview.md 开始
-├── 01-characters/          # 复制 templates/01-characters/
+├── rules.md                # 本书专属写作军规与文风约定（从 templates/rules.md 开始）
+├── 00-overview.md          # 整体设定和核心概念（从 templates/00-overview.md 开始）
+├── 01-characters/          # 角色档案库（复制 templates/01-characters/）
 │   └── protagonist.md
-├── 02-world/               # 参考 references/world-building-guide.md 创建
-├── 03-volumes/             # 复制 templates/03-volumes/
+├── 02-world/               # 世界观设定与代价体系
+│   └── world.md
+├── 03-volumes/             # 分卷大纲（复制 templates/03-volumes/）
 │   └── volume-01.md
-├── 04-chapters/            # 复制 templates/04-chapters/
+├── 04-chapters/            # 纯净正文库（即拷即发，复制 templates/04-chapters/）
 │   └── chapter-template.md
-└── 05-tracker/             # 复制 templates/05-tracker/
-    └── foreshadowing.md
+└── 05-tracker/             # 独立解耦追踪看板（复制 templates/05-tracker/）
+    ├── context.md          # 即时状态机与上下文
+    ├── capabilities.md     # 能力边界与战力追踪
+    └── foreshadowing.md    # 全书伏笔矩阵
 ```
 
 ## 工作流程

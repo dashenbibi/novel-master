@@ -99,11 +99,13 @@ function createProject(name, type, concept) {
   writeTemplate(path.join(projectDir, 'rules.md'), 'rules.md');
   writeTemplate(path.join(projectDir, '01-characters', 'protagonist.md'), path.join('01-characters', 'protagonist.md'));
   writeTemplate(path.join(projectDir, '02-world', 'world.md'), path.join('02-world', 'world.md'));
+  writeTemplate(path.join(projectDir, '05-tracker', 'context.md'), path.join('05-tracker', 'context.md'));
+  writeTemplate(path.join(projectDir, '05-tracker', 'capabilities.md'), path.join('05-tracker', 'capabilities.md'));
   writeTemplate(path.join(projectDir, '05-tracker', 'foreshadowing.md'), path.join('05-tracker', 'foreshadowing.md'));
 
   console.log(`✅ 项目创建成功：${projectDir}`);
   console.log(`📁 目录结构已生成`);
-  console.log(`📝 已生成 overview、rules、主角档案、世界观与伏笔追踪起始文件`);
+  console.log(`📝 已生成 overview、rules、主角档案、世界观与三维独立追踪看板（context, capabilities, foreshadowing）`);
 }
 
 function createOutline(projectName, volumeNo) {
